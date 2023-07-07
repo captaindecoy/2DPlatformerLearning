@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(rigidBody.velocity.y);
+        //Debug.Log(rigidBody.velocity.y);
         //anim.Play("Base Layer.anim3", 0, 0);
         //Debug.Log(anim.GetAnimatorTransitionInfo(0));
         if (Input.GetButtonDown("Jump"))

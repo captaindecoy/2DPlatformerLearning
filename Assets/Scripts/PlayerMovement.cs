@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log("Velocity: " + rigidBody.velocity.y);
         }
         anim.SetFloat("Speed", rigidBody.velocity.y);
-        Debug.Log(rigidBody.velocity.y);
+        //Debug.Log(rigidBody.velocity.y);
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene("SampleScene");
@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.layer == 6) // TODO: Change to Tag I think
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("Level1-1");
         }
 
         /*
@@ -96,6 +96,13 @@ public class PlayerMovement : MonoBehaviour
             Object.Instantiate(floorPrefab, spawnPoint, transform.localRotation);
             Object.Destroy(collision.gameObject);
             rigidBody.velocity = Vector2.zero;
+        }
+
+        if (collision.gameObject.CompareTag("Goal"))
+        {
+            Debug.Log("Goal!");
+            GoalBehavior gb = collision.GetComponent<GoalBehavior>();
+            gb.loadNextScene();
         }
     }
 

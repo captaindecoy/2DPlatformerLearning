@@ -45,56 +45,29 @@ public class PlayerMovement : MonoBehaviour
         //Debug.Log(rigidBody.velocity.y);
         if (Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            //SceneManager.LoadScene("SampleScene");
         }
 
         if (transform.position.y < -30)
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            //SceneManager.LoadScene("SampleScene");
         }
         
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        /*
-        if (collision.gameObject.layer == 6) // TODO: Change to Tag I think
-        {
-            SceneManager.LoadScene("Level1-1");
-        }
-        */
-        /*
-        if (collision.gameObject.layer == 7) // TODO: Change to Tag I think
-        {
-            // TODO: Likely something here messing up positioning for respawning
-            SaveData.Instance.lastCheckpoint = collision.transform.position;
-            var spawnPoint = new Vector3(transform.position.x, 
-                                    transform.position.y - 1.5f, 
-                                    transform.position.z);
-            Object.Instantiate(floorPrefab, spawnPoint, transform.localRotation);
-            Object.Destroy(collision.gameObject);
-        }
-        */
-
-        if (collision.gameObject.CompareTag("Key"))
-        {
-            Debug.Log("Key!");
-            Object.Destroy(collision.gameObject);
-        }
-
     }
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
         if (collision.CompareTag("Enemy"))
         {
-            SceneManager.LoadScene("Level1-1");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            //SceneManager.LoadScene("Level1-1");
         }
-        Debug.Log("Trigger!");
+        //Debug.Log("Trigger!");
         if (collision.CompareTag("Checkpoint"))
         //if (collision.gameObject.layer == 7) // TODO: Change to Tag I think
         {
-            // TODO: Likely something here messing up positioning for respawning
             SaveData.Instance.lastCheckpoint = collision.transform.position;
             var spawnPoint = new Vector3(transform.position.x,
                                     transform.position.y - 1.5f,
@@ -104,10 +77,17 @@ public class PlayerMovement : MonoBehaviour
             rigidBody.velocity = Vector2.zero;
         }
 
+        if (collision.gameObject.CompareTag("Key"))
+        {
+            //Debug.Log("Key!");
+            Object.Destroy(collision.gameObject);
+        }
+
         if (collision.gameObject.CompareTag("Goal"))
         {
-            Debug.Log("Goal!");
+            //Debug.Log("Goal!");
             GoalBehavior gb = collision.GetComponent<GoalBehavior>();
+            SaveData.Instance.lastCheckpoint = Vector3.zero;
             gb.loadNextScene();
         }
     }

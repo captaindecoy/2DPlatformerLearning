@@ -14,6 +14,7 @@ public class LockedFloor : MonoBehaviour
     }
 
     // Update is called once per frame
+    // Really shouldn't need to process the key check everyframe
     void Update()
     {
         for (int i = 0; i < keys.Count; i++)

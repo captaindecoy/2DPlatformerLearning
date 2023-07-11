@@ -33,7 +33,7 @@ public class TurretBehavior : MonoBehaviour
             {
                 if (hit.collider.gameObject.layer == 0)
                 {
-                    Debug.Log("Raycast hit! X: " + hit.point.x + " Y: " + hit.point.y);
+                    //Debug.Log("Raycast hit! X: " + hit.point.x + " Y: " + hit.point.y);
                     fireRateTimer = fireRate;
                     var bullet = Object.Instantiate(bulletPrefab, transform.position, transform.rotation);
                     var bulletScript = bullet.GetComponent<BulletBehavior>();

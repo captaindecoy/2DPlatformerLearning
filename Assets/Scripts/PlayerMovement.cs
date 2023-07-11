@@ -57,11 +57,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        /*
         if (collision.gameObject.layer == 6) // TODO: Change to Tag I think
         {
             SceneManager.LoadScene("Level1-1");
         }
-
+        */
         /*
         if (collision.gameObject.layer == 7) // TODO: Change to Tag I think
         {
@@ -85,8 +86,13 @@ public class PlayerMovement : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
+        if (collision.CompareTag("Enemy"))
+        {
+            SceneManager.LoadScene("Level1-1");
+        }
         Debug.Log("Trigger!");
-        if (collision.gameObject.layer == 7) // TODO: Change to Tag I think
+        if (collision.CompareTag("Checkpoint"))
+        //if (collision.gameObject.layer == 7) // TODO: Change to Tag I think
         {
             // TODO: Likely something here messing up positioning for respawning
             SaveData.Instance.lastCheckpoint = collision.transform.position;
@@ -106,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // This is an experiment with moving floors
 	private void OnCollisionStay2D(Collision2D collision)
     {
 		GameObject otherObject = collision.gameObject;

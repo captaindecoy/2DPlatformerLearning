@@ -10,6 +10,10 @@ public class PlayerMovement : MonoBehaviour
     Vector2 maxVelocityVector;
     public Animator anim;
 
+    //private static readonly int Jump = Animator.StringToHash("Base Layer.Player_Jump");
+    private static readonly int Idle = Animator.StringToHash("Player_Idle");
+    private static readonly int Jump = Animator.StringToHash("Player_Jump");
+
     void Start()
     {
         // Tried in awake but had no reference to SaveData yet
@@ -21,12 +25,20 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
+        if (rigidBody.velocity.y < 0)
+        {
+            anim.CrossFade(Idle, 0, 0);
+        }
+        */
         //Debug.Log(rigidBody.velocity.y);
         //anim.Play("Base Layer.anim3", 0, 0);
         //Debug.Log(anim.GetAnimatorTransitionInfo(0));
         if (Input.GetButtonDown("Jump"))
         {
-            anim.SetFloat("Speed", jumpVelocity);
+            //anim.CrossFade(Jump, 0, 0);
+            //anim.SetFloat("Speed", 1); //THIS WORKS
+            anim.CrossFade(Jump, 0, 0);
             //anim.Play("anim");
             if (rigidBody.velocity.y + jumpVelocity < maxVelocity)
             {
@@ -41,7 +53,12 @@ public class PlayerMovement : MonoBehaviour
             
             //Debug.Log("Velocity: " + rigidBody.velocity.y);
         }
-        anim.SetFloat("Speed", rigidBody.velocity.y);
+        /*
+        if (rigidBody.velocity.y < 0)
+        {
+            anim.SetFloat("Speed", rigidBody.velocity.y);
+        }
+        */
         //Debug.Log(rigidBody.velocity.y);
         if (Input.GetKeyDown(KeyCode.R))
         {

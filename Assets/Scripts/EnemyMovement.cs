@@ -20,6 +20,7 @@ public class EnemyMovement : MonoBehaviour
     {
         //if (enabled)
         //{
+        /*
             gameObject.transform.position += new Vector3(speed * startingDirection * Time.deltaTime, 0, 0);
             if (gameObject.transform.position.x > xMax)
             {
@@ -29,11 +30,25 @@ public class EnemyMovement : MonoBehaviour
             {
                 startingDirection = 1;
             }
+        */
         //}
     }
 
+	private void FixedUpdate()
+	{
+        gameObject.transform.position += new Vector3(speed * startingDirection * Time.deltaTime, 0, 0);
+        if (gameObject.transform.position.x > xMax)
+        {
+            startingDirection = -1;
+        }
+        if (gameObject.transform.position.x < xMin)
+        {
+            startingDirection = 1;
+        }
+    }
 
-    private void OnDrawGizmos()
+
+	private void OnDrawGizmos()
     {
         Gizmos.color = new Color(1, 0, 0, 0.75f);
         //Gizmos.DrawSphere(transform.position, xDirection);

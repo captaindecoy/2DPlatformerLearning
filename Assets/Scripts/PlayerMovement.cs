@@ -106,7 +106,14 @@ public class PlayerMovement : MonoBehaviour
             GoalBehavior gb = collision.GetComponent<GoalBehavior>();
             SaveData.Instance.lastCheckpoint = Vector3.zero;
             //gb.loadNextScene();
-            SceneManager.LoadScene("Level1-2"); //made this change due to build issue
+            if (SceneManager.GetActiveScene().name == "Level1-1")
+            {
+                SceneManager.LoadScene("Level1-2"); //made this change due to build issue
+            }
+            else if (SceneManager.GetActiveScene().name == "Level1-2")
+            {
+                SceneManager.LoadScene("Level1-3"); //made this change due to build issue
+            }
         }
     }
 

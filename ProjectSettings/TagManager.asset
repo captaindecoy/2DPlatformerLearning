@@ -9,6 +9,8 @@ TagManager:
   - Goal
   - Enemy
   - Checkpoint
+  - BottomWarp
+  - TopWarp
   layers:
   - Default
   - TransparentFX

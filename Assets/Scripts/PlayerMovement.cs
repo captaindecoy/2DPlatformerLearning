@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
     float maxVelocity = 20f;
     Vector2 maxVelocityVector;
     public Animator anim;
+    [SerializeField]
+    float maxFallingSpeed;
 
     //private static readonly int Jump = Animator.StringToHash("Base Layer.Player_Jump");
     private static readonly int Idle = Animator.StringToHash("Player_Idle");
@@ -71,6 +73,14 @@ public class PlayerMovement : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             //SceneManager.LoadScene("SampleScene");
         }
+
+        
+        if (rigidBody.velocity.y < maxFallingSpeed)
+        {
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, maxFallingSpeed);
+        }
+
+        //Debug.Log("Y Velocity: " + rigidBody.velocity.y);
         
     }
 
@@ -114,6 +124,16 @@ public class PlayerMovement : MonoBehaviour
             {
                 SceneManager.LoadScene("Level1-3"); //made this change due to build issue
             }
+        }
+
+        if (collision.gameObject.CompareTag("BottomWarp"))
+        {
+            transform.position = new Vector3(transform.position.x, 6f, transform.position.z);
+        }
+
+        if (collision.gameObject.CompareTag("TopWarp"))
+        {
+            transform.position = new Vector3(transform.position.x, -6f, transform.position.z);
         }
     }
 

@@ -43,7 +43,7 @@ public class EnemyMovement2 : MonoBehaviour
         gameObject.transform.position += new Vector3(speed * startingDirection * Time.deltaTime, 0, 0);
     }
 
-
+    /*
 	private void OnDrawGizmos()
     {
         Gizmos.color = new Color(1, 0, 0, 0.75f);
@@ -51,4 +51,5 @@ public class EnemyMovement2 : MonoBehaviour
         Gizmos.DrawLine(new Vector3(xMin, transform.position.y), new Vector3(xMax, transform.position.y));
 
     }
+    */
 }

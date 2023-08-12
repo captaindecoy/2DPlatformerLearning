@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D rigidBody;
     public int jumpVelocity;
@@ -11,6 +11,9 @@ public class PlayerMovement : MonoBehaviour
     public Animator anim;
     [SerializeField]
     float maxFallingSpeed;
+    [SerializeField]
+    GameObject spawner;
+    Enemy2_Spawn enemy2Spawn;
 
     //private static readonly int Jump = Animator.StringToHash("Base Layer.Player_Jump");
     private static readonly int Idle = Animator.StringToHash("Player_Idle");
@@ -22,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
         //anim = gameObject.GetComponent<Animator>();
         transform.position = SaveData.Instance.lastCheckpoint;
         maxVelocityVector = new Vector2(0, maxVelocity);
+        enemy2Spawn = spawner.GetComponent<Enemy2_Spawn>();
     }
 
     // Update is called once per frame
@@ -128,12 +132,24 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.gameObject.CompareTag("BottomWarp"))
         {
-            transform.position = new Vector3(transform.position.x, 6f, transform.position.z);
+            ConnectedWarp warp = collision.gameObject.GetComponent<ConnectedWarp>();
+            GameObject otherWarp = warp.getTopWarp();
+            transform.position = new Vector3(otherWarp.gameObject.transform.position.x, otherWarp.gameObject.transform.position.y - 1f);
+            //transform.position = new Vector3(transform.position.x, 6f, transform.position.z);
         }
 
         if (collision.gameObject.CompareTag("TopWarp"))
         {
-            transform.position = new Vector3(transform.position.x, -6f, transform.position.z);
+            ConnectedWarp warp = collision.gameObject.GetComponent<ConnectedWarp>();
+            GameObject otherWarp = warp.getTopWarp();
+            transform.position = new Vector3(otherWarp.gameObject.transform.position.x, otherWarp.gameObject.transform.position.y + 1f);
+            //transform.position = new Vector3(transform.position.x, 6f, transform.position.z);
+        }
+
+        if (collision.gameObject.CompareTag("Coin"))
+        {
+            enemy2Spawn.score += 100;
+            Object.Destroy(collision.gameObject);
         }
     }
 

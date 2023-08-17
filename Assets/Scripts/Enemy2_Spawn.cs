@@ -43,45 +43,35 @@ public class Enemy2_Spawn : MonoBehaviour
             //newEnemy2.transform.position = position
         }
         */
+        /*
         if (spawnTimer != 0)
         {
             spawnTimer--;
         }
         else
         {
+            Debug.Log("Game Timer: " + gameTimer);
             spawnTimer = spawnRate;
             spawnGameObject(enemy2);
             spawnGameObject(coin);
-            /*
-            float xPos = -12f;
-            //Debug.Log(Random.Range(0, 2));
-            if (Random.Range(0, 2) == 1)
-            {
-                xPos = 12f;
-            }
-            var position = new Vector3(xPos, Random.Range(-4.5f, 4.5f), 1f);
-            GameObject newEnemy2 = Object.Instantiate(enemy2, position, enemy2.transform.rotation);
-            if (xPos == 12f)
-            {
-                newEnemy2.transform.Rotate(0f, 0f, 180f, Space.Self);
-                EnemyMovement2 enemyMovement2 = newEnemy2.GetComponent<EnemyMovement2>();
-                enemyMovement2.startingDirection = -1;
-            }
-            
-            if (Random.Range(0, 2) == 1)
-            {
-                xPos = 12f;
-            }
-            position = new Vector3(xPos, Random.Range(-4.5f, 4.5f), 1f);
-            GameObject newCoin = Object.Instantiate(coin, position, coin.transform.rotation);
-            if (xPos == 12f)
-            {
-                coin.transform.Rotate(0f, 0f, 180f, Space.Self);
-                EnemyMovement2 enemyMovement2 = newEnemy2.GetComponent<EnemyMovement2>();
-                enemyMovement2.startingDirection = -1;
-            }
-            */
         }
+        */
+        if(gameTimer % spawnRate == 0)
+        {
+            Debug.Log("Game Timer: " + gameTimer);
+            spawnTimer = spawnRate;
+            spawnGameObject(enemy2);
+            //spawnGameObject(coin);
+        }
+        else if (gameTimer % (spawnRate/2) == 0)
+        {
+            Debug.Log("Game Timer: " + gameTimer);
+            spawnTimer = spawnRate;
+            //spawnGameObject(enemy2);
+            spawnGameObject(coin);
+        }
+
+
         //score += 100;
         //score++;
         scoreText.SetText(score.ToString());

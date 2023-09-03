@@ -12,6 +12,7 @@ TagManager:
   - BottomWarp
   - TopWarp
   - Coin
+  - PowerUp
   layers:
   - Default
   - TransparentFX

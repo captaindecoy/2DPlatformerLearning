@@ -13,6 +13,8 @@ public class Enemy2_Spawn : MonoBehaviour
     TMP_Text scoreText;
     [SerializeField]
     TMP_Text timeText;
+    [SerializeField]
+    GameObject somePrefab;
     // Start is called before the first frame update
     public int score = 0;
     [SerializeField]
@@ -27,8 +29,9 @@ public class Enemy2_Spawn : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (gameTimer > 1000)
+        if (gameTimer > 1000) // was >
         {
+            //Object.Instantiate(somePrefab, new Vector3(-2.5f, 0f), Quaternion.identity);
             spawnRate = 60;
         }
         if (gameTimer > 2000)

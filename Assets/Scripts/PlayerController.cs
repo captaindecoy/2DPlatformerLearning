@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject spawner;
     Enemy2_Spawn enemy2Spawn;
+    [SerializeField]
+    GameObject shield;
 
     //private static readonly int Jump = Animator.StringToHash("Base Layer.Player_Jump");
     private static readonly int Idle = Animator.StringToHash("Player_Idle");
@@ -23,7 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         // Tried in awake but had no reference to SaveData yet
         //anim = gameObject.GetComponent<Animator>();
-        transform.position = SaveData.Instance.lastCheckpoint;
+        transform.position = SaveData.Instance.lastCheckpoint; //is creating a dependency/linkage I don't like
         maxVelocityVector = new Vector2(0, maxVelocity);
         enemy2Spawn = spawner.GetComponent<Enemy2_Spawn>();
     }
@@ -134,6 +136,8 @@ public class PlayerController : MonoBehaviour
         {
             ConnectedWarp warp = collision.gameObject.GetComponent<ConnectedWarp>();
             GameObject otherWarp = warp.getTopWarp();
+            ParticleSystem particleSystem = otherWarp.gameObject.GetComponent<ParticleSystem>();
+            particleSystem.Play();
             transform.position = new Vector3(otherWarp.gameObject.transform.position.x, otherWarp.gameObject.transform.position.y - 1f);
             //transform.position = new Vector3(transform.position.x, 6f, transform.position.z);
         }
@@ -149,6 +153,13 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Coin"))
         {
             enemy2Spawn.score += 100;
+            Object.Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("PowerUp"))
+        {
+            //enemy2Spawn.score += 100;
+            shield.gameObject.SetActive(true);
             Object.Destroy(collision.gameObject);
         }
     }

@@ -80,6 +80,7 @@ public class Enemy2_Spawn : MonoBehaviour
         scoreText.SetText(score.ToString());
 
         gameTimer++;
+        //var timeTest = System.TimeSpan.FromMilliseconds(gameTimer);
         timeText.SetText(gameTimer.ToString());
     }
 
